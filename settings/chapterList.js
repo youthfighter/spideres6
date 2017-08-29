@@ -22,6 +22,13 @@ module.exports = {
                     },
                 }
 
+            },
+            chapterList:{
+                'selector':'#list dd a',
+                'value':{
+                    'name': ['text'],
+                    'url': ['attr', 'href'],
+                }
             }
         }
     }

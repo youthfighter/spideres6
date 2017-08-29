@@ -117,6 +117,7 @@ class spiderRequest{
                     let body = iconv.decode(res.body, self.encode);
                     let $ = cheerio.load(body,{decodeEntities: false});
                     ret = self.getResult($('body'),self.content);
+                    ret?ret['url']= self.url:{'url':self.url};
                     resolve(ret);
                 })
                 .catch((err)=>{
@@ -163,4 +164,3 @@ class spiderRequest{
 }
 
 module.exports = spiderRequest;
-

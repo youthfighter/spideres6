@@ -7,7 +7,7 @@ const spiderRequest = require('../../spider/spiderRequest');
 const bookList = require('../../settings/bookList');
 const chapterList = require('../../settings/chapterList');
 const Async = require('../tools/promise-async');
-let num = 0;
+
 class BookInfo{
     static saveABookInfo(url){
         return function () {
@@ -43,8 +43,6 @@ class BookInfo{
                     tasks =  result.map(function(item,index){
                         return BookInfo.saveABookInfo(item.url);
                     });
-                    //console.log(tasks);
-                    //tasks = tasks.slice(0,20);
                 }
                 return tasks;
             })

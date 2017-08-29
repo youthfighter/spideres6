@@ -2,9 +2,11 @@
  * Created by Administrator on 2017/8/18 0018.
  */
 const baseDao = require('./baseDao');
-const Book = require('../model/book');
 const bookMapper = require('../mapper/bookMapper');
 class bookDao extends baseDao{
+    static queryBookByNameAndAuthor(name,author){
+        return super.query(bookMapper.queryBookByNameAndAuthor,[name,author]);
+    }
     static queryAll(){
         return super.query(bookMapper.queryAll);
     }
@@ -21,9 +23,4 @@ class bookDao extends baseDao{
         return super.query(bookMapper.delete,modSqlParams);
     }
 }
-/*let bd = new bookDao();
-bd.queryAll()
-    .then(function(result){
-        console.log(result[0].id);
-    });*/
  module.exports = bookDao;
