@@ -14,7 +14,6 @@ class BookInfoController{
         let book;
         sr.getContent()
             .then(data=>{
-                console.log(data)
                 if(data&&data.bookinfo){
                     let bookinfo = data.bookinfo,
                         name = bookinfo.name,

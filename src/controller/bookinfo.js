@@ -9,54 +9,13 @@ const chapterList = require('../../settings/chapterList');
 const Async = require('../tools/promise-async');
 
 class BookInfo{
-    static saveABookInfo(url){
-        return function () {
-            chapterList.url = url;
-            let sr = new spiderRequest(chapterList);
-            return new Promise((resolve,reject)=>{
-                sr.getContent()
-                    .then((data)=>{
-                        if(data&&data.bookinfo){
-                            let bookinfo = data.bookinfo,
-                                name = bookinfo.name,
-                                author =  bookinfo.author;
-                            let book = new Book(name,author);
-                            resolve(bookDao.insert(book));
-                        }else{
-                            reject('bookinfo is null');
-                        }
-
-                    })
-                    .catch((err)=>{
-                        reject(err);
-                    });
-            });
-        }
-    }
-    updateBookInfo(){
-        let self = this;
-        let sr = new spiderRequest(bookList);
-        sr.getContent()
-            .then(function(result){
-                let tasks = [];
-                if(Array.isArray(result)){
-                    tasks =  result.map(function(item,index){
-                        return BookInfo.saveABookInfo(item.url);
-                    });
-                }
-                return tasks;
-            })
-            .then(tasks=>{
-                return Async.parallel(tasks,20);
-            })
+    static updateABookInfo(url){
+        chapterList.url = url;
+        return new spiderRequest(chapterList)
+            .getContent()
             .then(data=>{
-                console.log(data);
+                return new Book(data.bookinfo.name,data.bookinfo.author).save();
             })
-            .catch(err=>{
-                console.log('error');
-            });
     }
 }
-let bi = new BookInfo();
-bi.updateBookInfo();
-// BookInfo.saveABookInfo('http://www.37zw.net/0/613/')
+BookInfo.updateABookInfo('http://www.37zw.net/0/613/');

@@ -6,6 +6,10 @@ module.exports = {
     content: {
         'selector': '.box_con',
         'children':{
+            'chapterName':{
+                'selector':'.bookname h1',
+                'value':['text']
+            },
             'content':{
                 'selector':'#content',
                 'value': ['html']

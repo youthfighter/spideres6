@@ -3,7 +3,7 @@
  */
 const baseDao = require('./baseDao');
 const bookMapper = require('../mapper/bookMapper');
-class bookDao extends baseDao{
+class BookDao extends baseDao{
     static queryBookByNameAndAuthor(name,author){
         return super.query(bookMapper.queryBookByNameAndAuthor,[name,author]);
     }
@@ -23,4 +23,4 @@ class bookDao extends baseDao{
         return super.query(bookMapper.delete,modSqlParams);
     }
 }
- module.exports = bookDao;
+ module.exports = BookDao;

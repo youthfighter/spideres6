@@ -4,9 +4,9 @@
 const baseDao = require('./baseDao');
 const chapterMapper = require('../mapper/chapterMapper');
 
-class bookDao extends baseDao{
-    static queryChapter(name,author,chapter){
-        return super.query(chapterMapper.queryBookByNameAndAuthor,[name,author,chapter]);
+class ChapterDao extends baseDao{
+    static queryChapter(bookId,chapterIndex){
+        return super.query(chapterMapper.queryChapterByBookIdAndChapterIndex,[bookId,chapterIndex]);
     }
     static queryAll(){
         return super.query(chapterMapper.queryAll);
@@ -16,7 +16,7 @@ class bookDao extends baseDao{
         return super.query(chapterMapper.update,modSqlParams);
     }
     static insert(chapter){
-        let modSqlParams = [chapter.bookId,chapter.chapterName,chapter.content];
+        let modSqlParams = [chapter.bookId,chapter.chapterIndex,chapter.chapterName,chapter.content];
         return super.query(chapterMapper.insert,modSqlParams);
     }
     static delete(chapter){
@@ -24,3 +24,4 @@ class bookDao extends baseDao{
         return super.query(chapterMapper.delete,modSqlParams);
     }
 }
+module.exports = ChapterDao;
