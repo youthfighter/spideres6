@@ -12,7 +12,7 @@ gulp.task("scripts",function(){
         .pipe(gulp.dest(config.scripts.temp))
         .pipe(webpack({
             output:{
-                filename:"spider.js",
+                filename:"bookspider.js",
             },
             stats:{
                 colors:true
